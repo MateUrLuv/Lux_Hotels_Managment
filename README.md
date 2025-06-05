@@ -1,59 +1,45 @@
-# 🌟 Lux Hotels – Smart Hotel Reservation System
+🌟 Lux Hotels – Smart Hotel Reservation System
 
-Welcome to **Lux Hotels**, a modern and dynamic hotel reservation system built with Django, MySQL, and Bootstrap.  
-This project provides a full-stack experience by integrating a beautiful responsive frontend with powerful backend operations like **CRUD** (Create, Read, Update, Delete) functionalities, authentication, and database connectivity.
+Welcome to Lux Hotels, a modern full-stack hotel reservation system built with Django, MySQL, and (optionally) React/Next.js.
+This project delivers a seamless booking experience with robust backend operations, a responsive frontend, secure authentication, and real-time database connectivity.
+🚀 Built With
+<p align="left"> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/> </p>
+📜 Project Description
 
----
+    Lux Hotels is a smart hotel reservation platform for browsing, booking, and managing hotel stays.
 
-## 🚀 Built With:
+    Backend: Django REST Framework with MySQL for robust, scalable data management.
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-</p>
+    Frontend: Responsive UI using React/Next.js (or Django templates), Bootstrap, HTML, CSS, and JavaScript.
 
----
+    Authentication: Secure login/register for users; admin dashboard for staff.
 
-## 📜 Project Description
+    CRUD Operations: Manage hotels, rooms, reservations, and payments.
 
-- Lux Hotels is a hotel reservation platform that offers customers a smooth experience to browse, book, and manage hotel reservations.
-- Fully dynamic website powered by Django backend and MySQL database.
-- Modern, mobile-friendly frontend using HTML, CSS, JavaScript, and Bootstrap.
-- Authentication system (login/register) for users.
-- Admin dashboard to perform CRUD operations on hotels, bookings, and customers.
-- Integration of database models, views, and templates following Django’s MVC (MVT) architecture.
-- Smooth, intuitive navigation across pages like Home, About Us, Hotels List, Booking Form, Contact Us, etc.
-- Strong database schema supporting relationships between hotels, rooms, users, and bookings.
+    Modern UX: Smooth navigation, instant feedback, and mobile-first design.
 
----
+    Database: Well-structured schema with clear relationships between hotels, rooms, users, and bookings.
 
-## 📂 Features
+📂 Features
 
-✅ User Registration and Login  
-✅ Hotel Browsing and Searching  
-✅ Booking Creation and Management  
-✅ Admin CRUD Operations (Create, Read, Update, Delete)  
-✅ Responsive Frontend Design  
-✅ Dynamic Database-Driven Pages  
-✅ Secure and Scalable Django Backend  
+✅ User Registration & Login
+✅ Hotel & Room Browsing
+✅ Booking Creation & Management
+✅ Payment Tracking
+✅ Admin CRUD (Create, Read, Update, Delete) for Hotels, Rooms, Reservations, Payments
+✅ Responsive Frontend Design
+✅ Secure Django Backend
+✅ Real-time Database Updates
+🛠️ Installation & Local Setup
 
----
+Clone and run locally in minutes:
 
-## 🛠️ Installation & Local Setup
-
-Follow these simple steps to run **Lux Hotels** locally:
-
-```bash
+bash
 # 1. Clone the repository
-git clone https://github.com/your-username/lux-hotels.git
+git clone https://github.com/your-username/Lux_Hotels_Managment.git
 
 # 2. Navigate into the project directory
-cd lux-hotels
+cd Lux_Hotels_Managment
 
 # 3. Create a virtual environment
 python -m venv venv
@@ -64,66 +50,72 @@ venv\Scripts\activate
 # macOS/Linux
 source venv/bin/activate
 
-# 5. Install the required packages
+# 5. Install backend dependencies
 pip install -r requirements.txt
 
-# 6. Setup database (make migrations)
+# 6. Set up the database (update DATABASES in settings.py if needed)
 python manage.py makemigrations
 python manage.py migrate
 
-# 7. Run the development server
+# 7. (Optional) Create a superuser for admin access
+python manage.py createsuperuser
+
+# 8. Run the development server
 python manage.py runserver
-```
 
-Then, open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser 🚀
+For React frontend (if applicable):
 
----
+bash
+cd frontend
+npm install
+npm run dev
 
-## 🧠 Database Design
+Open http://127.0.0.1:8000 (Django) or http://localhost:3000 (React) in your browser 🚀
+🧠 Database Design
 
-- Models Created: User, Hotel, Room, Booking
-- Relationships Established:
-  - One hotel can have multiple rooms.
-  - Users can make multiple bookings.
-- SQL handled via Django ORM and MySQL database integration.
+    Core Models: User, Hotel, Room, Reservation, Payment
 
----
+    Relationships:
 
-## 🎥 Video Walkthrough
+        One hotel has many rooms.
 
-- Quick tour of the frontend pages (Home, About, Hotels, Contact, Login/Register).
-- Demo of CRUD operations: Add, Edit, Delete hotels/bookings via Admin.
-- Backend integration demo (database updates in real-time).
-- Walkthrough of the database tables and fields inside MySQL.
-- Project stack explanation (Python, Django, MySQL, Bootstrap frontend).
+        Users can make multiple reservations.
 
----
+        Each reservation is for a specific room.
 
-## 📈 Future Enhancements (Optional)
+        Payments are linked to reservations.
 
-- Payment gateway integration (Razorpay, Stripe).
-- Dynamic room pricing and offers.
-- User booking history and reviews system.
-- Email notifications for booking confirmations.
+🎥 Demo Walkthrough
 
----
+    Browse hotels and rooms, filter by location or type.
 
-## 🤝 Contributors
+    Register/login as a user and make a reservation.
 
-- Developed with ❤️ by [Your Name]  
-- Special thanks to Django documentation, Bootstrap community, and MySQL resources.
+    View and manage your bookings.
 
----
+    Admin dashboard: Add, edit, delete hotels, rooms, reservations, payments.
 
-## 📄 License
+    Real-time updates: Bookings and payments instantly update the database.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+📈 Future Enhancements
 
----
+    Payment gateway integration (Stripe, Razorpay)
 
-# 🌟 Thank You for Visiting Lux Hotels! 🌟
+    User booking history and reviews
 
----
+    Email notifications for bookings
 
----
+    Advanced search and filters
 
+    Room availability calendar
+
+🤝 Contributors
+
+    Developed by [Your Name]
+
+    Special thanks to the Django, React, and MySQL communities.
+
+📄 License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
+🌟 Thank You for Exploring Lux Hotels! 🌟
