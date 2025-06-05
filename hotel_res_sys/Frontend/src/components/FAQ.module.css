@@ -1,0 +1,37 @@
+.faqSection {
+    max-width: 700px;
+    margin: 3em auto 2em auto;
+    background: rgba(0, 31, 63, 0.7);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+  .faqSection h2 {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+  .faqItem {
+    margin-bottom: 1em;
+  }
+  .faqItem button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.8em 0;
+    border-bottom: 1px solid #444;
+    display: flex;
+    justify-content: space-between;
+  }
+  .faqItem p {
+    color: var(--white);
+    margin: 0.5em 0 0 0;
+    font-size: 1rem;
+  }
+  

@@ -1,0 +1,151 @@
+.outer {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #f6f8fa 60%, #e6eaf5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 36px rgba(10, 17, 40, 0.13);
+    padding: 2.5em 2em 2em 2em;
+    margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2em;
+    color: #0a1128;
+    font-weight: 700;
+    margin-bottom: 1.2em;
+    letter-spacing: 0.01em;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+  }
+  
+  .fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .label {
+    font-weight: 500;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    font-size: 1.08em;
+  }
+  
+  .input {
+    border: 1.5px solid #d4af37;
+    border-radius: 7px;
+    padding: 0.5em 1em;
+    font-size: 1.08em;
+    margin-top: 0.2em;
+    background: #f9fafb;
+    transition: border 0.2s;
+  }
+  .input:focus {
+    border-color: #0a1128;
+    outline: none;
+  }
+  
+  .button {
+    background: linear-gradient(90deg, #d4af37 70%, #bfa134 100%);
+    color: #0a1128;
+    border: none;
+    border-radius: 7px;
+    padding: 0.7em 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.2em;
+    font-size: 1.14em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.09);
+    transition: background 0.22s, color 0.22s, box-shadow 0.18s;
+  }
+  .button:disabled {
+    background: #eee;
+    color: #bbb;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .infoBox {
+    background: #f6f8fa;
+    border-radius: 10px;
+    padding: 1em 1.1em;
+    margin: 0.2em 0 0.7em 0;
+    font-size: 1.08em;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    box-shadow: 0 2px 8px rgba(10, 17, 40, 0.06);
+  }
+  .priceInfo {
+    margin: 0.5em 0 0.5em 0;
+    color: #0a1128;
+    font-size: 1.13em;
+    background: #f9f6ea;
+    border-radius: 7px;
+    padding: 0.6em 1em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  
+  .highlight {
+    color: #d4af37;
+    font-weight: bold;
+  }
+  
+  .message {
+    margin-top: 1.2em;
+    padding: 0.8em 1em;
+    background: #e6f9ec;
+    color: #1a7f37;
+    border-left: 4px solid #d4af37;
+    border-radius: 7px;
+    font-size: 1.07em;
+    text-align: center;
+  }
+  
+  .loginMsg {
+    color: #d43a3a;
+    text-align: center;
+    font-size: 1.15em;
+    margin: 2em 0;
+  }
+  
+  .tip {
+    margin-top: 1.2em;
+    background: #f6f8fa;
+    color: #0a1128;
+    border-left: 4px solid #d4af37;
+    padding: 0.7em 1em;
+    border-radius: 7px;
+    font-size: 1.08em;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      padding: 1.1em 0.5em;
+      max-width: 99vw;
+    }
+  }
+  

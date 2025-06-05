@@ -1,0 +1,62 @@
+.container {
+    max-width: 600px;
+    margin: 2.5em auto 2em auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(10, 17, 40, 0.10);
+    padding: 2em 2em 1.5em 2em;
+  }
+  .title {
+    text-align: center;
+    font-size: 1.6em;
+    color: #0a1128;
+    margin-bottom: 1em;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    margin-top: 1.5em;
+  }
+  .card {
+    background: #f6f8fa;
+    border-radius: 10px;
+    padding: 1.2em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #d4af37;
+  }
+  .payBtn {
+    background: #d4af37;
+    color: #0a1128;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.08em;
+    transition: background 0.2s, color 0.2s;
+  }
+  .payBtn:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+  }
+  .message {
+    margin-top: 1.2em;
+    padding: 0.8em 1em;
+    background: #e6f9ec;
+    color: #1a7f37;
+    border-left: 4px solid #d4af37;
+    border-radius: 7px;
+    font-size: 1.07em;
+    text-align: center;
+  }
+  .loginMsg {
+    color: #d43a3a;
+    text-align: center;
+    font-size: 1.15em;
+    margin: 2em 0;
+  }
+  

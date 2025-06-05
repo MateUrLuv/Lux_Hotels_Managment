@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,10 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'reservations',
     'rest_framework',
+    'rest_framework.authtoken',
+      'django.contrib.sites',
     'corsheaders',
 
     
 ]
+AUTH_USER_MODEL = 'reservations.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +70,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
   
 ]
+CORS_ALLOW_ALL_ORIGINS = True  # For development only!
+
 
 ROOT_URLCONF = 'hotel_res_sys.urls'
 
@@ -82,9 +99,9 @@ WSGI_APPLICATION = 'hotel_res_sys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'HotelResSys',
-        'USER': 'root',
-        'PASSWORD': 'Nkumar**06',  # Replace with your MySQL password
+        'NAME': 'LuxHotels',  # Must match your MySQL DB name
+        'USER': 'root',       # Or your MySQL username
+        'PASSWORD': 'Nkumar**06',  # Your MySQL password
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -131,7 +148,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",  # Allow frontend origin
-]
 
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  # or timedelta(hours=1), etc.
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    # ... other settings ...
+}

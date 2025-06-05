@@ -1,102 +1,106 @@
+from django.conf import settings
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
-class Hotel(models.Model):
-    hotel_id = models.AutoField(primary_key=True)
-    hotel_name = models.CharField(max_length=255, null=False)
-    location = models.CharField(max_length=255)
-    contact = models.CharField(max_length=20)
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
-    total_rooms = models.IntegerField()
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-    class Meta:
-        db_table = 'hotel'
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
+        return self.create_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    full_name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    address = models.TextField(blank=True)
+    role = models.CharField(max_length=10, default="user", blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['full_name', 'phone']
+
+    objects = UserManager()
+
+
+class Hotel(models.Model):
+    hotel_name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    contact = models.CharField(max_length=20, blank=True)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
+    total_rooms = models.IntegerField()
+    description = models.TextField(blank=True)
+    
 
     def __str__(self):
         return self.hotel_name
 
 class Room(models.Model):
-    room_id = models.AutoField(primary_key=True)
-    hotel_id = models.IntegerField()
-    room_number = models.CharField(max_length=10, null=False)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    room_number = models.CharField(max_length=10)
     room_type = models.CharField(max_length=50)
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
     availability_status = models.BooleanField(default=True)
-
-    class Meta:
-        db_table = 'room'
-
+    description = models.TextField(blank=True)
+   
     def __str__(self):
-        return f"Room {self.room_number}"
-
-class Customer(models.Model):
-    customer_id = models.AutoField(primary_key=True)
-    full_name = models.CharField(max_length=255, null=False)
-    email = models.CharField(max_length=255, unique=True, null=False)
-    phone = models.CharField(max_length=20)
-    address = models.TextField()
-    password = models.CharField(max_length=255, null=False)
-    booking_history = models.TextField()
-
-    class Meta:
-        db_table = 'customer'
-
-    def __str__(self):
-        return self.full_name
+        return f"{self.hotel.hotel_name} - {self.room_number}"
 
 class Reservation(models.Model):
-    reservation_id = models.AutoField(primary_key=True)
-    customer_id = models.IntegerField()
-    room_id = models.IntegerField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = 'reservation'
+    status = models.CharField(max_length=10, choices=[
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+        ('completed', 'Completed')
+    ], default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Reservation {self.reservation_id}"
+        return f"Reservation {self.id} by {self.user}"
 
 class Payment(models.Model):
-    payment_id = models.AutoField(primary_key=True)
-    reservation_id = models.IntegerField()
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(max_length=50)
-    payment_status = models.CharField(max_length=50)
-    transaction_date = models.DateField()
-
-    class Meta:
-        db_table = 'payment'
-
-    def __str__(self):
-        return f"Payment {self.payment_id}"
-
-class Staff(models.Model):
-    staff_id = models.AutoField(primary_key=True)
-    hotel_id = models.IntegerField()
-    full_name = models.CharField(max_length=255, null=False)
-    role = models.CharField(max_length=50)
-    contact = models.CharField(max_length=20)
-    email = models.CharField(max_length=255, unique=True)
-    shift_schedule = models.TextField()
-
-    class Meta:
-        db_table = 'staff'
+    payment_status = models.CharField(max_length=10, choices=[
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+        ('failed', 'Failed'),
+        ('refunded', 'Refunded')
+    ], default='pending')
+    transaction_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.full_name
+        return f"Payment {self.id} for Reservation {self.reservation.id}"
 
-class Review(models.Model):
-    review_id = models.AutoField(primary_key=True)
-    customer_id = models.IntegerField()
-    hotel_id = models.IntegerField()
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
-    feedback = models.TextField()
-    review_date = models.DateField()
 
-    class Meta:
-        db_table = 'review'
+class Payment(models.Model):
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method = models.CharField(max_length=50)
+    PAYMENT_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+        ('failed', 'Failed'),
+        ('refunded', 'Refunded'),
+    ]
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='pending')
+    transaction_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Review {self.review_id}"
+        return f"Payment {self.id} for Reservation {self.reservation.id}"
+
