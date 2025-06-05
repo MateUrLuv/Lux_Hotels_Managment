@@ -111,7 +111,7 @@ Open http://127.0.0.1:8000 (Django) or http://localhost:3000 (React) in your bro
 
 🤝 Contributors
 
-    Developed by [Your Name]
+    Developed by Sushanth N Koushik
 
     Special thanks to the Django, React, and MySQL communities.
 
